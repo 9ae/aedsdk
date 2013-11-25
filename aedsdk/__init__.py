@@ -1,8 +1,6 @@
 import inspect
 from abc import ABCMeta, abstractmethod, abstractproperty
 
-import exp
-
 class Interval:
 	__metaclass__ = ABCMeta
 	

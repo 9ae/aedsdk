@@ -55,8 +55,8 @@ class Interval:
 			action = act_class()
 			self.__setattr__('a_'+act_class.__name__,action)
 	
-	def set_experiment(self, exp):
-		self.exp = exp
+	def set_executioner(self, exe):
+		self.exe = exe
 	
 	def __str__(self):
 		basic = self.name+" { duration:"+str(self.duration)
@@ -71,8 +71,8 @@ class Action:
 	def set_prop(self,name,val):
 		pass
 
-	def set_experiment(self, exp):
-		self.exp = exp	
+	def set_executioner(self, exe):
+		self.exe = exe	
 		
 class Event:
 	__metaclass__ = ABCMeta
@@ -86,15 +86,15 @@ class Event:
 	def set_prop(self,name,val):
 		pass
 
-	def set_experiment(self, exp):
-		self.exp = exp
+	def set_executioner(self, exe):
+		self.exe = exe
 
 class Paradigm(object):
 	def __init__(self):
 		self.atypes = []
 		self.etypes = []
 		self.itypes = []
-		self.exp = None
+		self.exe = None
 		self.sort_classes()
 
 	"""
@@ -132,11 +132,8 @@ class Paradigm(object):
 									good = False
 			return good
 	
-	def set_experiment(self, exp):
-		self.exp = exp
-	
-	def new_experiment(self):
-		return exp.Experiment(self)
+	def set_executioner(self, exe):
+		self.exe = exe
 	
 	def print_classes(self):
 			print '\n listing actions'

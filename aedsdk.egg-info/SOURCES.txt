@@ -1,0 +1,8 @@
+setup.py
+aedsdk/__init__.py
+aedsdk.egg-info/PKG-INFO
+aedsdk.egg-info/SOURCES.txt
+aedsdk.egg-info/dependency_links.txt
+aedsdk.egg-info/not-zip-safe
+aedsdk.egg-info/requires.txt
+aedsdk.egg-info/top_level.txt

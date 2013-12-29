@@ -19,6 +19,9 @@ class Interval:
 	def prev(self,value):
 		self._prev = value
 	
+	def init_duration(self,value):
+		self.duration = value
+	
 	@abstractmethod
 	def meanwhile(self): pass
 
@@ -45,10 +48,17 @@ class Interval:
 	def register_actions(self,paradigm):
 		for act_class in paradigm.atypes:
 			action = act_class()
+			action.set_executioner(self.exe)
 			self.__setattr__('a_'+act_class.__name__,action)
 	
 	def set_executioner(self, exe):
 		self.exe = exe
+	
+	def json(self):
+		result = {'props':[]}
+		result['type'] = type(self).__name__
+		result['name'] = self.name
+		return result
 	
 	def __str__(self):
 		basic = self.name+" { duration:"+str(self.duration)
@@ -64,7 +74,12 @@ class Action:
 		pass
 
 	def set_executioner(self, exe):
-		self.exe = exe	
+		self.exe = exe
+	
+	def json(self):
+		result = {'props':[]}
+		result['type'] = type(self).__name__
+		return result	
 		
 class Event:
 	__metaclass__ = ABCMeta
@@ -80,6 +95,11 @@ class Event:
 
 	def set_executioner(self, exe):
 		self.exe = exe
+	
+	def json(self):
+		result = {'props':[]}
+		result['type'] = type(self).__name__
+		return result	
 
 class Paradigm(object):
 	def __init__(self):
@@ -126,17 +146,18 @@ class Paradigm(object):
 	
 	def set_executioner(self, exe):
 		self.exe = exe
+		#for act_class in self.atypes:
+		#	act_class.set_executioner(exe)
 	
-	def print_classes(self):
-			print '\n listing actions'
-			for a in self.atypes:
-					print a
-			print '\n listing events'
-			for e in self.etypes:
-					print e
-			print '\n listing intervals'
-			for i in self.itypes:
-					print i
-					
+	def json(self):
+		result = {'actions':[], 'intervals':[], 'events':[]}
+		for a in self.atypes:
+			result['actions'].append(a.json())
+		for i in self.itypes:
+			result['intervals'].append(i.json())
+		for e in self.etypes:
+			result['events'].append(e.json())
+		return result
+				
 	def instantiate_name(self,name):
 		return eval('self.'+name+'()')

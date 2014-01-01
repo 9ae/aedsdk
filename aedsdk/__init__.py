@@ -54,10 +54,10 @@ class Interval:
 	def set_executioner(self, exe):
 		self.exe = exe
 	
-	def json(self):
+	@classmethod
+	def json(cls):
 		result = {'props':[]}
-		result['type'] = type(self).__name__
-		result['name'] = self.name
+		result['type'] = cls.__name__
 		return result
 	
 	def __str__(self):
@@ -76,9 +76,10 @@ class Action:
 	def set_executioner(self, exe):
 		self.exe = exe
 	
-	def json(self):
+	@classmethod
+	def json(cls):
 		result = {'props':[]}
-		result['type'] = type(self).__name__
+		result['type'] = cls.__name__
 		return result	
 		
 class Event:
@@ -96,9 +97,10 @@ class Event:
 	def set_executioner(self, exe):
 		self.exe = exe
 	
-	def json(self):
+	@classmethod
+	def json(cls):
 		result = {'props':[]}
-		result['type'] = type(self).__name__
+		result['type'] = cls.__name__
 		return result	
 
 class Paradigm(object):

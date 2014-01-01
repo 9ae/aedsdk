@@ -1,3 +1,9 @@
 *.class
 *.pyc
 *.pyo
+
+build/lib/aedsdk/__init__.py
+
+build/lib/aedsdk/__init__.py
+
+dist/aedsdk-0.1-py2.7.egg
